@@ -1,0 +1,2 @@
+add_library(CubicOctree INTERFACE)
+target_include_directories(CubicOctree INTERFACE include)

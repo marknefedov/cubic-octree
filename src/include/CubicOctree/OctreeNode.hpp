@@ -1,5 +1,5 @@
-#ifndef TEST_OCTREENODE_HPP
-#define TEST_OCTREENODE_HPP
+#ifndef TERO_OCTREENODE_HPP
+#define TERO_OCTREENODE_HPP
 
 #include <bitset>
 #include <iostream>
@@ -27,7 +27,7 @@ namespace Teroleon {
             }
         }
 
-        /// Checks if all subnodes contain same value and if so, merges them into currentn node.
+        /// Checks if all subnodes contain same value and if so, merges them into current node.
         /// \param simplifySubnodes perform recursive simplification.
         /// \return was simplification performed.
         bool Simplify(bool simplifySubNodes = false) {
@@ -52,4 +52,4 @@ namespace Teroleon {
     };
 }
 
-#endif//TEST_OCTREENODE_HPP
+#endif//TERO_OCTREENODE_HPP

@@ -1,0 +1,6 @@
+add_executable(Test main.cpp)
+target_link_libraries(Test PRIVATE CubicOctree)
+if (${FUZZ_TEST})
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=fuzzer,leak -fprofile-instr-generate -fcoverage-mapping")
+    target_compile_definitions(Test PRIVATE FUZZER=1)
+endif()

@@ -1,10 +1,13 @@
-#ifndef TEST_OCTREE_HPP
-#define TEST_OCTREE_HPP
+#ifndef TERO_OCTREE_HPP
+#define TERO_OCTREE_HPP
 
 #include "OctreeNode.hpp"
 #include <cmath>
 
 namespace Teroleon{
+    /// Cubic octree allocates noodes on demand.
+    /// \tparam T Stored type
+    /// \tparam Depth Number of splits, index limits is 2^depth.
     template<typename T, uint16_t Depth>
     class Octree{
         OctreeNode<T> root;
@@ -60,11 +63,12 @@ namespace Teroleon{
             return *std::get<std::shared_ptr<T>>(currentNode->data);
         }
 
-        void FullSimplify()
+        /// Removes nodes that can be respresented as single branch.
+        void SimplifyTree()
         {
             root.Simplify(true);
         }
     };
 }
 
-#endif//TEST_OCTREE_HPP
+#endif//TERO_OCTREE_HPP
