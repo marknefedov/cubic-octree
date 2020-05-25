@@ -63,7 +63,7 @@ namespace Teroleon{
             return *std::get<std::shared_ptr<T>>(currentNode->data);
         }
 
-        /// Removes nodes that can be respresented as single branch.
+        /// Collapses nodes that can be represented as single branch.
         void SimplifyTree()
         {
             root.Simplify(true);
