@@ -7,13 +7,12 @@ using namespace Teroleon;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     if (size < 3 || size > 5) return 0;
-    if (data[0] < 0 || data[1] < 0 || data[2] < 0) return 0;
     int controlVal = data[3];
     int testval;
     Octree<int, 5> testOctree;
     try {
         testOctree.Set(data[0], data[1], data[2], data[3]);
-        testOctree.FullSimplify();
+        testOctree.SimplifyTree();
         testval = testOctree.Get(data[0], data[1], data[2]);
     }
     catch (const std::out_of_range& e) {
