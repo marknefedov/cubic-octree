@@ -26,7 +26,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
 int main() {
     std::map<std::tuple<int, int, int>, int> testmap;
     Octree<int, 5> testOctree;
-    for (int repeates = 0; repeates < 1000; ++repeates) {
+    for (int repeates = 0; repeates < 100; ++repeates) {
         for (int i = 0; i < 32; ++i) {
             for (int j = 0; j < 32; ++j) {
                 for (int k = 0; k < 32; ++k) {

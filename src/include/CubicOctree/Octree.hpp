@@ -33,9 +33,8 @@ namespace Teroleon{
             while (currentDepth < Depth)
             {
                 std::bitset<3> locationalCode = NodePositionSingleLevel(x, y, z, size/std::pow(2, currentDepth));
-                size_t index = locationalCode.to_ulong();
                 if(currentNode->isLeaf) currentNode->Subdivide();
-                currentNode = &std::get<std::shared_ptr<OctreeNode<T>[]>>(currentNode->data)[index];
+                currentNode = &std::get<std::shared_ptr<OctreeNode<T>[]>>(currentNode->data)[locationalCode.to_ulong()];
                 size_t offset = size/std::pow(2, currentDepth)/2;
                 if (locationalCode.test(0)) x -= offset;
                 if (locationalCode.test(1)) y -= offset;
@@ -52,8 +51,7 @@ namespace Teroleon{
             while (!currentNode->isLeaf)
             {
                 std::bitset<3> locationalCode = NodePositionSingleLevel(x, y, z, size/std::pow(2, currentDepth));
-                size_t index = locationalCode.to_ulong();
-                currentNode = &std::get<std::shared_ptr<OctreeNode<T>[]>>(currentNode->data)[index];
+                currentNode = &std::get<std::shared_ptr<OctreeNode<T>[]>>(currentNode->data)[locationalCode.to_ulong()];
                 size_t offset = size/std::pow(2, currentDepth)/2;
                 if (locationalCode.test(0)) x -= offset;
                 if (locationalCode.test(1)) y -= offset;
