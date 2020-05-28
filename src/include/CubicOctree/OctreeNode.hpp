@@ -9,8 +9,8 @@
 // X right, Y up, Z forward
 
 namespace Teroleon {
-    template<typename T>
-    requires std::equality_comparable<T> struct OctreeNode {
+    template<typename T> requires std::equality_comparable<T>
+    struct OctreeNode {
         std::variant<std::shared_ptr<OctreeNode<T>[]>, std::shared_ptr<T>> data;
         bool isLeaf;
 
