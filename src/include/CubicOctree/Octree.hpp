@@ -13,7 +13,7 @@ namespace Teroleon{
         OctreeNode<T> root;
         const size_t size = std::pow(2, Depth);
 
-        std::bitset<3> NodePositionSingleLevel(const size_t x, const size_t y, const size_t z, const size_t levelSize)
+        [[nodiscard]] std::bitset<3> NodePositionSingleLevel(const size_t x, const size_t y, const size_t z, const size_t levelSize) const noexcept
         {
             const uint8_t halfSize = levelSize/2;
             std::bitset<3> code;
@@ -44,10 +44,10 @@ namespace Teroleon{
             currentNode->data = std::make_shared<T>(value);
         }
 
-        T Get(size_t x, size_t y, size_t z){
+        T Get(size_t x, size_t y, size_t z) const {
             if (x > size || y > size || z > size) throw std::out_of_range("Out of bounds");
             uint16_t currentDepth = 0;
-            OctreeNode<T>* currentNode = &root;
+            const OctreeNode<T>* currentNode = &root;
             while (!currentNode->isLeaf)
             {
                 std::bitset<3> locationalCode = NodePositionSingleLevel(x, y, z, size/std::pow(2, currentDepth));

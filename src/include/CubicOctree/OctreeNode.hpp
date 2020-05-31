@@ -15,7 +15,7 @@ namespace Teroleon {
         bool isLeaf;
 
         /// Subdivide current node and copy it content to new leaves.
-        void Subdivide() {
+        void Subdivide() noexcept {
             if (!isLeaf) return;
             isLeaf = false;
             auto savedValue = std::get<std::shared_ptr<T>>(data);
@@ -30,7 +30,7 @@ namespace Teroleon {
         /// Checks if all subnodes contain same value and if so, merges them into current node.
         /// \param simplifySubnodes perform recursive simplification.
         /// \return was simplification performed.
-        bool Simplify(bool simplifySubNodes = false) {
+        bool Simplify(bool simplifySubNodes = false) noexcept {
             if (isLeaf) return false;
             auto subNodes = std::get<std::shared_ptr<OctreeNode<T>[]>>(data);
             if (simplifySubNodes) {
