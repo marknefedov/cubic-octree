@@ -23,6 +23,14 @@ namespace Teroleon{
             return code;
         }
 
+        /// Updates x,y,z to be in range of next subnode.
+        void InnerLocation(uint16_t currentDepth, const std::bitset<3> &locationalCode, size_t &x, size_t &y, size_t &z) const noexcept {
+            size_t offset = size /std::pow(2, currentDepth)/2;
+            if (locationalCode.test(0)) x -= offset;
+            if (locationalCode.test(1)) y -= offset;
+            if (locationalCode.test(2)) z -= offset;
+        }
+
     public:
         Octree() : root({std::make_shared<T>(T()), true}){}
 
@@ -35,10 +43,7 @@ namespace Teroleon{
                 std::bitset<3> locationalCode = NodePositionSingleLevel(x, y, z, size/std::pow(2, currentDepth));
                 if(currentNode->isLeaf) currentNode->Subdivide();
                 currentNode = &std::get<std::shared_ptr<OctreeNode<T>[]>>(currentNode->data)[locationalCode.to_ulong()];
-                size_t offset = size/std::pow(2, currentDepth)/2;
-                if (locationalCode.test(0)) x -= offset;
-                if (locationalCode.test(1)) y -= offset;
-                if (locationalCode.test(2)) z -= offset;
+                InnerLocation(currentDepth, locationalCode, x, y, z);
                 currentDepth++;
             }
             currentNode->data = std::make_shared<T>(value);
@@ -52,16 +57,13 @@ namespace Teroleon{
             {
                 std::bitset<3> locationalCode = NodePositionSingleLevel(x, y, z, size/std::pow(2, currentDepth));
                 currentNode = &std::get<std::shared_ptr<OctreeNode<T>[]>>(currentNode->data)[locationalCode.to_ulong()];
-                size_t offset = size/std::pow(2, currentDepth)/2;
-                if (locationalCode.test(0)) x -= offset;
-                if (locationalCode.test(1)) y -= offset;
-                if (locationalCode.test(2)) z -= offset;
+                InnerLocation(currentDepth, locationalCode, x, y, z);
                 currentDepth++;
             }
             return *std::get<std::shared_ptr<T>>(currentNode->data);
         }
 
-        /// Collapses nodes that can be represented as single branch.
+        /// Collapse nodes that can be represented as a single branch.
         void SimplifyTree()
         {
             root.Simplify(true);
