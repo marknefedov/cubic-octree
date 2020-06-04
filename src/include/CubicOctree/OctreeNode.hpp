@@ -16,6 +16,7 @@ namespace Teroleon {
     template<typename T>
     class swStorage{
         sharedPtrTypeSelector<T> data;
+        
     public:
         bool operator==(const swStorage &rhs) const {
             if constexpr (std::is_pointer_v<sharedPtrTypeSelector<T>>)
