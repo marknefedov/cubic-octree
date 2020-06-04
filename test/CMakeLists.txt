@@ -1,5 +1,8 @@
 add_executable(Test main.cpp)
 target_link_libraries(Test PRIVATE CubicOctree)
+if (CMAKE_BUILD_TYPE STREQUAL "Release")
+    set_target_properties(Test PROPERTIES CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Ofast -march=native" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Ofast -march=native")
+endif()
 if (${FUZZ_TEST})
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=fuzzer,leak -fprofile-instr-generate -fcoverage-mapping")
     target_compile_definitions(Test PRIVATE FUZZER=1)

@@ -32,7 +32,7 @@ namespace Teroleon{
         }
 
     public:
-        Octree() : root({std::make_shared<T>(T()), true}){}
+        Octree() : root({T(), true}){}
 
         void Set(size_t x, size_t y, size_t z, T value) {
             if (x > size || y > size || z > size) throw std::out_of_range("Out of bounds");
@@ -46,7 +46,7 @@ namespace Teroleon{
                 InnerLocation(currentDepth, locationalCode, x, y, z);
                 currentDepth++;
             }
-            currentNode->data = std::make_shared<T>(value);
+            currentNode->data = swStorage<T>(value);
         }
 
         T Get(size_t x, size_t y, size_t z) const {
@@ -60,7 +60,7 @@ namespace Teroleon{
                 InnerLocation(currentDepth, locationalCode, x, y, z);
                 currentDepth++;
             }
-            return *std::get<std::shared_ptr<T>>(currentNode->data);
+            return std::get<swStorage<T>>(currentNode->data);
         }
 
         /// Collapse nodes that can be represented as a single branch.
