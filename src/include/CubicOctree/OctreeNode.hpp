@@ -36,19 +36,14 @@ namespace Teroleon {
 
         swStorage(){
             if constexpr (std::is_pointer_v<sharedPtrTypeSelector<T>>)
-                data = std::make_shared<T>();
+                data = std::make_shared<T>(0);
         }
 
         explicit swStorage(const T& newData){
             if constexpr (std::is_pointer_v<sharedPtrTypeSelector<T>>)
                 data = std::make_shared<T>(newData);
-        }
-
-        void operator=(const T& other_data){
-            if constexpr (std::is_pointer_v<sharedPtrTypeSelector<T>>)
-                *data = other_data;
             else
-                data = other_data;
+                data = newData;
         }
     };
 
