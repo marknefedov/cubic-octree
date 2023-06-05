@@ -1,4 +1,4 @@
-# Cubic-octree [![CodeFactor](https://www.codefactor.io/repository/github/markusgod/cubic-octree/badge/master)](https://www.codefactor.io/repository/github/markusgod/cubic-octree/overview/master) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/002dc8d796c34fc799801662452fa004)](https://www.codacy.com/manual/markusgod/cubic-octree?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=markusgod/cubic-octree&amp;utm_campaign=Badge_Grade)
+# Cubic-octree [![CodeFactor](https://www.codefactor.io/repository/github/marknefedov/cubic-octree/badge)](https://www.codefactor.io/repository/github/marknefedov/cubic-octree/badge) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/1855da7c093d47a3bb1d16e0b33a5b89)](https://app.codacy.com/gh/marknefedov/cubic-octree/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 Cubic octree with array-like access. Originally made to store voxel data for minecraft-like terrain.
 
 ## Example
